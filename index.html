@@ -308,17 +308,27 @@
                   </a>
               </li>
               <li class="sub-menu">
-                  <a href="javascript:;" class="">
+                  <a href="index.html" class="">
                       <i class="icon_document_alt"></i>
                       <span>點歌姬</span>
-
                   </a>
                   <ul class="sub">
                       <li><a class="" href="form_component.html">Form Elements</a></li>                          
                       <li><a class="" href="form_validation.html">Form Validation</a></li>
                   </ul>
-              </li>       
-
+              </li>  
+              <li>
+                  <a class="" href="javascript:;">
+                      <i class="icon_piechart"></i>
+                      <span>製圖桌(未)</span>
+                  </a>
+              </li>     
+              <li>
+                  <a class="" href="javascript:;">
+                      <i class="icon_desktop"></i>
+                      <span>鍵盤宗師(未)</span>
+                  </a>
+              </li>     
 
           </ul>
           <!-- sidebar menu end-->
@@ -358,11 +368,7 @@
     </div>  
     <!-- Today status end -->
 </div><!--/col-->
-
-
-
 <!-- statics end -->
-
 </section>
 <!--Project Activity end-->
 </div>
@@ -391,7 +397,7 @@
  <div class="col-md-6">
      <button type="submit" class="btn btn-md btn-primary"  style="font-size:18px;" id="playFancy" >&nbsp開始抽籤&nbsp</button>
      <button type="reset" class="btn btn-info" style="font-size:18px;" onclick="show()"><span class="glyphicon glyphicon-cog" ></span>設定</button>
-     
+
      <a target="_blank" href="LottoQuery.html" class="btn btn-danger" style="font-size:18px;"><span class="glyphicon glyphicon-question-sign"></span>教學</a>
  </div>
 </div>
@@ -603,8 +609,6 @@ function show(){
     $('input[name="my-checkbox"]').on('switchChange.bootstrapSwitch', function(event, state) {
   status=state;// true | false
 });
-
-
     //隨機生成一個值  取值範圍  random( [min,max]);
     function random(range){
         var repest=0;

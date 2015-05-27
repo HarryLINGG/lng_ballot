@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ChartQuery</title>
+</head>
+<body>
+ <div class="col-lg-6">
+  <section class="panel">
+    <header class="panel-heading">
+      Bar
+    </header>
+    <div class="panel-body text-center">
+      <canvas id="bar" height="300" width="500"></canvas>
+    </div>
+  </section>
+</div>
+<!-- javascripts -->
+<script type="text/javascript"
+
+<script src="js/jquery.js"></script>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!-- chartjs -->
+<script src="https://www.google.com/jsapi" type="text/javascript"></script>
+<script src="assets/chart-master/Chart.js"></script>
+<!-- custom chart script for this page only-->
+<script src="js/chartjs-custom.js"></script>
+<!--custome script for all page-->
+
+<script type="text/javascript">
+
+  google.load('visualization', '1',
+    {'packages': ['table']});
+  function drawVisualization(){
+    url='https://docs.google.com/spreadsheets/d/1Rs1NCLSnTXxocGIhP5Jrd0X5MlCJ9FcTeuGHdMfh9xU/edit?usp=sharing';
+    var opts = {sendMethod: 'auto'};
+    var query = new google.visualization.Query(url,opts);  
+    query.setQuery("select B ");
+    query.send(function(resp){
+      if (!resp.isError()) {
+        var dataTable = resp.getDataTable();
+        var jsonData = JSON.parse(dataTable.toJSON());
+
+
+      }
+    });
+  }
+  $(document).ready(function() {
+    drawVisualization();
+    fffewfew();
+  });
+
+</script>
+
+
+</body>
+</html>
