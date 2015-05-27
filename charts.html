@@ -494,7 +494,7 @@
 </form>
 </div>
 </section>
-<script src ="https://apis.google.com/js/client.js" ></script> 
+<!--<script src ="https://apis.google.com/js/client.js" ></script> -->
 <script> 
   function auth(){ 
     var config ={ 
@@ -530,9 +530,28 @@ function show(){
       $('#adder').animate({ opacity: "hide" }, "fase", function () { $('#adder').css('display','none');});
       return false;
     });
+
+
     $(function () {
       $('#datetimepicker1').datepicker();
       $('#datetimepicker2').datepicker();
+
+
+      shortenUrl = function(longUrl) {
+        return $.ajax(console.log({
+          longUrl: longUrl
+        }), {
+          type: 'POST',
+          url: "https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyCzXNiYBoSdtloUEyeuXuERgVUKKcof5hc",
+    data: '{ longUrl: longUrl }', // <-- string here
+    dataType: 'json',
+    success: function(response) {
+      return console.log(response.data);
+    },
+    contentType: 'application/json'
+  });
+      };
+      console.log(longUrl);
     });
   </script>
 </body>
