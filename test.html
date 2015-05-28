@@ -2,6 +2,30 @@
 <head>
   <script src="https://apis.google.com/js/client.js"></script>
   <script>
+
+    function appendResults(text) {
+      var results = document.getElementById('results');
+      results.appendChild(document.createElement('P'));
+      results.appendChild(document.createTextNode(text));
+    }
+
+    function makeRequest() {
+      var request = gapi.client.urlshortener.url.get({
+        'shortUrl': 'http://goo.gl/0qXOUh'
+      });
+      request.then(function(response) {
+        appendResults(response.result.longUrl);
+      }, function(reason) {
+        console.log('Error: ' + reason.result.error.message);
+      });
+    }
+
+    function init() {
+      gapi.client.setApiKey('AIzaSyCzXNiYBoSdtloUEyeuXuERgVUKKcof5hc');
+      gapi.client.load('urlshortener', 'v1').then(makeRequest);
+    }
+
+
     function auth() {
       var config = {
         'client_id': '235636347022-k893um9mesijidpgc3td5neduo6cnkdk.apps.googleusercontent.com',
@@ -16,6 +40,8 @@
 </head>
 
 <body>
+  <div id="results"></div>
   <button onclick="auth();">Authorize</button>
+  <button onclick="init();">Authorize</button>
 </body>
 </html>
