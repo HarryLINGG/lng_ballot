@@ -1,32 +1,21 @@
 <html>
 <head>
+  <script src="https://apis.google.com/js/client.js"></script>
   <script>
-    function appendResults(text) {
-      var results = document.getElementById('results');
-      results.appendChild(document.createElement('P'));
-      results.appendChild(document.createTextNode(text));
-    }
-
-    function makeRequest() {
-      var request = gapi.client.urlshortener.url.get({
-        'shortUrl': 'http://harrylingg.github.io/lng_ballot/'
+    function auth() {
+      var config = {
+        'client_id': '235636347022.apps.googleusercontent.com',
+        'scope': 'https://www.googleapis.com/auth/urlshortener'
+      };
+      gapi.auth.authorize(config, function() {
+        console.log('login complete');
+        console.log(gapi.auth.getToken());
       });
-      request.then(function(response) {
-        appendResults(response.result.longUrl);
-      }, function(reason) {
-        console.log('Error: ' + reason.result.error.message);
-      });
-    }
-
-    function init() {
-      gapi.client.setApiKey('AIzaSyCksMgGmGBGiy1TD-roCtoL88y35l0lOOA');
-      gapi.client.load('urlshortener', 'v1').then(makeRequest);
     }
   </script>
-  <script src="https://apis.google.com/js/client.js?onload=init"></script>
 </head>
-<body>
-  <div id="results"></div>
-</body>
 
+<body>
+  <button onclick="auth();">Authorize</button>
+</body>
 </html>
