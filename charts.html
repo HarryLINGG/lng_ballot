@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="zh">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>LNG</title>
@@ -357,30 +357,23 @@
   <!--Project Activity end-->
 </div>
 
-</div><br><br>
+</div>
 <!-- Tags -->
 <div class="panel-body">
-  <form class="form-horizontal " method="get">
-    <div class="form-group">
-      <label id='lb01' class="col-sm-2 control-label">圖表網址</label>
-      <div class="col-sm-10">
-        <input type="text" id='txt1' class="form-control">
-      </div>
+  <div class="form-group col-lg-12">
+    <label id='lb01' class=" control-label" style="font-size:20px;">圖表網址</label>
+    <div >
+      <input type="text" id='getUrl' class="form-control">
     </div>
   </div>
-</form>
 </div>
-</div><br><br>
 <div class="form-group">
  <!-- Buttons -->
- <div id="results"></div>
  <div class="col-md-6">
    <button type="submit" class="btn btn-md btn-primary"  style="font-size:18px;" id="playFancy" >&nbsp產生網址&nbsp</button>
    <button type="reset" class="btn btn-info" style="font-size:18px;" onclick="show()"><span class="glyphicon glyphicon-cog" ></span>設定</button>
 
    <a target="_blank" href="LottoQuery.html" class="btn btn-danger" style="font-size:18px;"><span class="glyphicon glyphicon-question-sign"></span>教學</a>
-
-   <button  onclick = " auth (); " > Authorize </button> 
  </div>
 </div>
 </form>
@@ -429,9 +422,9 @@
        </div>
      </div>
      <div class="form-group">
-      <label  id='lb04' class="col-sm-2 control-label">名稱 5</label>
+      <label  id='lb05' class="col-sm-2 control-label">名稱 5</label>
       <div class="col-sm-10">
-       <input type="text" id='txt4' class="form-control">
+       <input type="text" id='txt5' class="form-control">
      </div>
    </div>
 
@@ -457,7 +450,7 @@
   <form>
     <div class="form-group" style=" width:250px;">
       標題:
-      <input type="text" class="form-control"  id="shareURL">
+      <input type="text" class="form-control"  id="title">
     </div>
     <div class="form-group">
       <div class="form-group" style=" width:250px;">
@@ -494,25 +487,10 @@
 </form>
 </div>
 </section>
-<!--<script src ="https://apis.google.com/js/client.js" ></script> -->
-<script> 
-  function auth(){ 
-    var config ={ 
-      'client_id':'AIzaSyCksMgGmGBGiy1TD-roCtoL88y35l0lOOA' , 
-      'scope' :'https://www.googleapis.com/auth/urlshortener' 
-    }; 
-    gapi.auth.authorize(config ,function() { 
-      console.log('login complete' ); 
-      console.log(gapi.auth.getToken()); 
-    }); 
-  } 
-</script> 
-
 <script src="js/jquery.js"></script>
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-datepicker.min.js"></script>
-
 
 <script type="text/javascript" charset="utf-8">
 //開啟圖表設定
@@ -530,26 +508,74 @@ function show(){
       $('#adder').animate({ opacity: "hide" }, "fase", function () { $('#adder').css('display','none');});
       return false;
     });
-    function ggg(){
-      var longURL='http://harrylingg.github.io/lng_ballot/charts.html';
-      $.ajax({
-        url: 'https://www.googleapis.com/urlshortener/v1/url?shortUrl=http://goo.gl/fbsS&key=AIzaSyCzXNiYBoSdtloUEyeuXuERgVUKKcof5hc',
-        type: 'POST',
-        contentType: 'application/json; charset=utf-8',
-        data: '{ longUrl: "' + longURL +'"}',
-        dataType: 'json',
-        success: function(response) {
-            var result = JSON.parse(response); // Evaluate the J-Son response object.
-          }
-        });
-    }
 
+    $('#playFancy').click(function(){
+     var title=$("#title").val();
+     var shareURL=$("#shareURL").val();
+     var startTime=$("#datetimepicker1").datepicker("getDate");
+     var endTime=$("#datetimepicker2").datepicker("getDate");
+
+     var txt1=$("#txt1").val();
+     var txt2=$("#txt2").val();
+     var txt3=$("#txt3").val();
+     var txt4=$("#txt4").val();
+     var txt5=$("#txt5").val();
+
+     var getUrl='file:///Users/HarryLin/Documents/lng_ballot/ChartQuery.html?shareURL='+shareURL +'&startTime= '+startTime+'&endTime= '+endTime+'&title= '+title+'&txt1= '+txt1+'&txt2= '+txt2+'&txt3= '+txt3+'&txt4= '+txt4+'&txt5= '+txt5;
+
+     var test=  makeShort(encodeURI(getUrl));
+     $('#getUrl').val(test);
+     return false;
+   });
+    
     $(function () {
-      $('#datetimepicker1').datepicker();
-      $('#datetimepicker2').datepicker();
-      ggg();
+     var startDate = new Date('2012-08-08');
+     $('#datetimepicker1').datepicker();
+     $('#datetimepicker2').datepicker();
+
+     $("#datetimepicker1").on("dp.change", function (e) {
+      $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
+
     });
-  </script>
+     $("#datetimepicker2").on("dp.change", function (e) {
+      $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
+    });
+     loadGapi();
+   });
+
+    function loadGapi()
+    {
+  gapi.client.setApiKey('AIzaSyCksMgGmGBGiy1TD-roCtoL88y35l0lOOA'); //get your ownn Browser API KEY
+  gapi.client.load('urlshortener', 'v1',function(){});
+  
+}
+
+function makeShort(longUrl) 
+{
+ var request = gapi.client.urlshortener.url.insert({
+  'resource': {
+    'longUrl': longUrl
+  }
+});
+ request.execute(function(response) 
+ {
+
+  if(response.id != null)
+  {
+    str ="<b>Long URL:</b>"+longUrl+"<br>";
+    str +="<b>Short URL:</b> <a href='"+response.id+"'>"+response.id+"</a><br>";
+    document.getElementById("output").innerHTML = str;
+  }
+  else
+  {
+    alert("error: creating short url");
+  }
+
+});
+}
+
+</script>
+<script src="https://apis.google.com/js/client.js"></script>
 </body>
 </html>
 

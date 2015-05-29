@@ -1,4 +1,4 @@
-function fffewfew() {
+function makeChart(title,values,name) {
 
     var doughnutData = [
     {
@@ -59,12 +59,15 @@ function fffewfew() {
 
     ];
     var barChartData = {
-        labels : ["六嘆","鳥屎","Sandy","魯蛋","婕翎"],
+        labels : [name[0],name[1],name[2],name[3],name[4]],
         datasets : [
-        {
-            fillColor : "rgba(220,220,220,0.5)",
-            strokeColor : "rgba(220,220,220,1)",
-            data : [4461,4883,3288,6032,4415]
+        { 
+            label: title,
+            fillColor: "rgba(220,220,220,0.5)",
+            strokeColor: "rgba(220,220,220,0.8)",
+            highlightFill: "rgba(220,220,220,0.75)",
+            highlightStroke: "rgba(220,220,220,1)",
+            data : [values[0],values[1],values[2],values[3],values[4]]
         }
         ]
 
