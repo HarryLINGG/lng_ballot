@@ -110,7 +110,7 @@
 google.load('visualization', '1',
   {'packages': ['table']});
 function drawVisualization(){
-  var shareURL=$.UrlParam("title")==" null"?"":$.UrlParam("title");
+  var shareURL=$.UrlParam("title")==" "?"":$.UrlParam("title");
   if(shareURL.length<0){
     url=shareURL;
   }else{
