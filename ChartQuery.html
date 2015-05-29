@@ -110,7 +110,12 @@
 google.load('visualization', '1',
   {'packages': ['table']});
 function drawVisualization(){
-  url='https://docs.google.com/spreadsheets/d/1Rs1NCLSnTXxocGIhP5Jrd0X5MlCJ9FcTeuGHdMfh9xU/edit?usp=sharing';
+  var shareURL=$.UrlParam("title")==" null"?"":$.UrlParam("title");
+  if(shareURL.length<0){
+    url=shareURL;
+  }else{
+    url='https://docs.google.com/spreadsheets/d/1Rs1NCLSnTXxocGIhP5Jrd0X5MlCJ9FcTeuGHdMfh9xU/edit?usp=sharing';
+  }
 
   var startTime = changeTime($.UrlParam("startTime"));
   var endTime = changeTime($.UrlParam("endTime"));
