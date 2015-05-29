@@ -216,8 +216,6 @@
     }
   }
 
-
-
   .winner li {
     -webkit-animation: winnerBox 2s infinite linear;
     -moz-animation: winnerBox 2s infinite linear;
@@ -558,23 +556,17 @@ function makeShort(longUrl)
 });
  request.execute(function(response) 
  {
-
   if(response.id != null)
   {
-    str ="<b>Long URL:</b>"+longUrl+"<br>";
-    str +="<b>Short URL:</b> <a href='"+response.id+"'>"+response.id+"</a><br>";
-    document.getElementById("output").innerHTML = str;
+    return response.id;
   }
   else
   {
     alert("error: creating short url");
   }
-
 });
 }
-
 window.onload = load;
-
 </script>
 <script src="https://apis.google.com/js/client.js"></script>
 </body>
