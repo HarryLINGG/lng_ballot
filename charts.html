@@ -520,9 +520,7 @@ function show(){
      var txt5=$("#txt5").val();
 
      var getUrl='http://harrylingg.github.io/lng_ballot/ChartQuery.html?shareURL='+shareURL +'&startTime= '+startTime+'&endTime= '+endTime+'&title= '+title+'&txt1= '+txt1+'&txt2= '+txt2+'&txt3= '+txt3+'&txt4= '+txt4+'&txt5= '+txt5;
-
-     var test=  makeShort(encodeURI(getUrl));
-     $('#getUrl').val(test);
+     makeShort(encodeURI(getUrl));
      return false;
    });
     
@@ -558,12 +556,12 @@ function makeShort(longUrl)
  {
   if(response.id != null)
   {
-    return response.id;
-  }
-  else
-  {
-    alert("error: creating short url");
-  }
+   $('#getUrl').val(response.id);
+ }
+ else
+ {
+  alert("error: creating short url");
+}
 });
 }
 window.onload = load;
