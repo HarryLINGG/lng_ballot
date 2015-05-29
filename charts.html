@@ -521,7 +521,7 @@ function show(){
      var txt4=$("#txt4").val();
      var txt5=$("#txt5").val();
 
-     var getUrl='file:///Users/HarryLin/Documents/lng_ballot/ChartQuery.html?shareURL='+shareURL +'&startTime= '+startTime+'&endTime= '+endTime+'&title= '+title+'&txt1= '+txt1+'&txt2= '+txt2+'&txt3= '+txt3+'&txt4= '+txt4+'&txt5= '+txt5;
+     var getUrl='http://harrylingg.github.io/lng_ballot/ChartQuery.html?shareURL='+shareURL +'&startTime= '+startTime+'&endTime= '+endTime+'&title= '+title+'&txt1= '+txt1+'&txt2= '+txt2+'&txt3= '+txt3+'&txt4= '+txt4+'&txt5= '+txt5;
 
      var test=  makeShort(encodeURI(getUrl));
      $('#getUrl').val(test);
@@ -540,10 +540,9 @@ function show(){
      $("#datetimepicker2").on("dp.change", function (e) {
       $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
     });
-     loadGapi();
    });
 
-    function loadGapi()
+    function load()
     {
   gapi.client.setApiKey('AIzaSyCksMgGmGBGiy1TD-roCtoL88y35l0lOOA'); //get your ownn Browser API KEY
   gapi.client.load('urlshortener', 'v1',function(){});
@@ -573,6 +572,8 @@ function makeShort(longUrl)
 
 });
 }
+
+window.onload = load;
 
 </script>
 <script src="https://apis.google.com/js/client.js"></script>
