@@ -21,7 +21,7 @@
     <section class="panel">
       <div class="row">
         <div class="col-lg-6">
-        <div class="form-group text-center" style="font-size:25px;">
+          <div class="form-group text-center" style="font-size:25px;">
            <strong >開始時間</strong> 
            <strong id='startTime' >00</strong> 
          </div>
@@ -71,17 +71,19 @@
 <script type="text/javascript">
 
   function changeTime(mydate) {
-
-    var time=new Date(mydate);
-    var yyyy = time.getFullYear().toString();
-    var mm = (time.getMonth() + 1).toString();
-    var dd = time.getDate().toString();
-    var hh = time.getHours().toString();
-    var h = time.getHours().toString();
-    var mi = time.getMinutes().toString();
-    var p =  yyyy +'-' +( mm[1] ? mm : "0" + mm[0]) + '-' + (dd[1] ? dd : "0" + dd[0]) +  ' '
-    var t = (h[1] ? mi : "0" + h[0]) + ':' + (mi[1] ? mi : "0" + mi[0]) + ':' + '00'
-    return p + t;
+    if(mydate!=" null"){
+      var time=new Date(mydate);
+      var yyyy = time.getFullYear().toString();
+      var mm = (time.getMonth() + 1).toString();
+      var dd = time.getDate().toString();
+      var hh = time.getHours().toString();
+      var h = time.getHours().toString();
+      var mi = time.getMinutes().toString();
+      var p =  yyyy +'-' +( mm[1] ? mm : "0" + mm[0]) + '-' + (dd[1] ? dd : "0" + dd[0]) +  ' '
+      var t = (h[1] ? mi : "0" + h[0]) + ':' + (mi[1] ? mi : "0" + mi[0]) + ':' + '00'
+      return p + t;
+    }
+    return "";
   }
 
   function getQueryString(name) {
@@ -108,7 +110,12 @@
 google.load('visualization', '1',
   {'packages': ['table']});
 function drawVisualization(){
-  url='https://docs.google.com/spreadsheets/d/1Rs1NCLSnTXxocGIhP5Jrd0X5MlCJ9FcTeuGHdMfh9xU/edit?usp=sharing';
+  var shareURL=$.UrlParam("title")==" "?"":$.UrlParam("title");
+  if(shareURL.length<0){
+    url=shareURL;
+  }else{
+    url='https://docs.google.com/spreadsheets/d/1Rs1NCLSnTXxocGIhP5Jrd0X5MlCJ9FcTeuGHdMfh9xU/edit?usp=sharing';
+  }
 
   var startTime = changeTime($.UrlParam("startTime"));
   var endTime = changeTime($.UrlParam("endTime"));
